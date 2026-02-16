@@ -1,3 +1,4 @@
-sqlalchemy==2.0.25
+sqlalchemy~=2.0.46
 psycopg2-binary
-python-dotenv
+python-dotenv~=1.2.1
+Faker~=40.4.0
