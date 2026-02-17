@@ -24,20 +24,19 @@ def generate_users(session: Session) -> list:
     # Распределение статусов учетных записей пользователей (80% активных)
     status_weights = [0.80, 0.20]
     statuses = [True, False]
-    status = random.choices(statuses, weights=status_weights)[0]
 
     for i in range(NUM_USERS):
         user = User(
             first_name=FIRST_NAMES[i],
             last_name=LAST_NAMES[i],
             email=EMAILS[i],
-            created_at=fake.date_time_between(start_date='-2y', end_date='now'),
-            is_active=status
+            registration_date=fake.date_time_between(start_date='-2y', end_date='now'),
+            is_active=random.choices(statuses, weights=status_weights)[0]
         )
         users.append(user)
-
+        print(f'{i+1} out of {NUM_USERS} users')
     # Сортировка по дате
-    users.sort(key=lambda x: x['created_at'])
+    users.sort(key=lambda x: x.registration_date)
 
     session.add_all(users)
     session.commit()
@@ -73,9 +72,10 @@ def generate_transactions(session: Session, users: list) -> list:
             user_id=user.id,
         )
         transactions.append(transaction)
+        print(f'{i + 1} out of {NUM_TRANSACTIONS} transactions')
 
     # Сортировка по дате
-    transactions.sort(key=lambda x: x['payment_date'])
+    transactions.sort(key=lambda x: x.payment_date)
 
     session.add_all(transactions)
     session.commit()

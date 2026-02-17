@@ -2,3 +2,5 @@ sqlalchemy~=2.0.46
 psycopg2-binary
 python-dotenv~=1.2.1
 Faker~=40.4.0
+fastapi~=0.129.0
+uvicorn[standard]==0.32.0
