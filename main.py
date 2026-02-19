@@ -204,6 +204,9 @@ def get_report(
             "summary": {
                 "total_transactions": 0,
                 "message": "Не найдено транзакций с заданными фильтрами"
+            },
+            "metrics": {
+                "total_amount": 0.0
             }
         }
 
